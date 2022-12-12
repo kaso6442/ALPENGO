@@ -69,8 +69,7 @@ def log(peak):
  
 
         if db.session.execute(db.select(userAchievement).filter_by(userID=user_ID, achievementID=1)).scalar() == None:
-            print("hello")
-            print(db.session.execute(db.select(userAchievement).filter_by(userID=user_ID, achievementID=1)).scalar())
+            db.session.execute(db.select(userAchievement).filter_by(userID=user_ID, achievementID=1)).scalar()
             userFirst = userAchievement(userID=user_ID, achievementID=1)
             db.session.add(userFirst)
 
@@ -82,8 +81,7 @@ def log(peak):
             db.session.add(userMiles)
 
         numHikes = db.session.query(userPeak.peakID).filter_by(userID=user_ID).distinct().count()
-        print(numHikes)
-
+        
 
         if numHikes and (numHikes > 4) and not db.session.execute(db.select(userAchievement).filter_by(userID=user_ID, achievementID=2)).scalar():
             userHalf = userAchievement(userID=user_ID, achievementID=2)
